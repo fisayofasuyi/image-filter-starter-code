@@ -33,13 +33,13 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
 
   app.get("/filteredimage", async ( req, res) => {
-    req.query.image_url
+   let img_url =  req.query.image_url
 
-  if (!req.query.image_url) {
+  if (!img_url) {
     return res.status(400).send("Please enter a valid url");
   }
 
-  const path = await filterImageFromURL(req.query.image_url);
+  const path = await filterImageFromURL(img_url);
   res.status(200).sendFile(path, function(){
     deleteLocalFiles([path]);
   });
